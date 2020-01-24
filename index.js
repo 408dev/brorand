@@ -1,5 +1,7 @@
 var r;
 
+import { randomBytes } from 'react-native-randombytes';
+
 module.exports = function rand(len) {
   if (!r)
     r = new Rand(null);
@@ -46,8 +48,8 @@ if (typeof self === 'object') {
   // Safari's WebWorkers do not have `crypto`
   } else if (typeof window === 'object') {
     // Old junk
-    Rand.prototype._rand = function() {
-      throw new Error('Not implemented yet');
+    Rand.prototype._rand = function _rand(n) {
+      return randomBytes(n);
     };
   }
 } else {
